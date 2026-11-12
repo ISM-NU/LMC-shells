@@ -385,17 +385,17 @@ def psi_path(out, name):
 
 
 def submit(out, bg, after=None):
-    """One hpc/irgetas/vgt.slurm job per cube without a finished run (run_metadata.toml is written last)."""
+    """One deps/VGT/hpc/irgetas/vgt.slurm job per cube without a finished run (run_metadata.toml is written last)."""
     ids = []
     for b, geom, c, s, hole in cube_list(bg):
         name = name_of(b, geom, c, s, hole)
         if os.path.exists(os.path.join(out, "vgt", name, "run_metadata.toml")):
             continue
         cmd = ["sbatch", "--parsable", "--job-name=vgt_synshell", "--cpus-per-task=8", "--mem=16G", "--time=01:00:00",
-               f"--export=ALL,VGT_REPO={REPO},VGT_CONFIG={os.path.join(out, 'configs', f'{name}.toml')}"]
+               f"--export=ALL,VGT_REPO={os.path.join(REPO, 'deps', 'VGT')},VGT_CONFIG={os.path.join(out, 'configs', f'{name}.toml')}"]
         if after:
             cmd.append(f"--dependency=afterok:{after}")
-        ids.append(subprocess.check_output(cmd + ["hpc/irgetas/vgt.slurm"], cwd=REPO, text=True).strip().split(";")[0])
+        ids.append(subprocess.check_output(cmd + ["deps/VGT/hpc/irgetas/vgt.slurm"], cwd=REPO, text=True).strip().split(";")[0])
         print(f"{name}: job {ids[-1]}", flush=True)
     print("VGT jobs:", ":".join(ids))
 

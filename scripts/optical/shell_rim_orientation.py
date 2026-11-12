@@ -52,6 +52,7 @@ from scipy.signal import fftconvolve
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, os.path.join(HERE, ".."))
+sys.path.insert(0, os.path.join(HERE, "..", "..", "deps", "LMC-foreground", "scripts"))  # compare_vgt_polarization
 sys.path.insert(0, HERE)
 import compare_vgt_polarization as cvp  # noqa: E402
 from demcels_quicklook import SHELLS, PC_PER_DEG  # noqa: E402
