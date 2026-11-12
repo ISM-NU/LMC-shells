@@ -10,10 +10,12 @@ Python only.
 
 ## Setup
 
+Usually this repository sits in the LMC workspace folder (`~/Projects/LMC`), whose `setup.sh` clones all related repositories next to each other and links the shared data; its AGENTS.md has the rules that span repositories.
+
 ```bash
 git clone --recursive git@github.com:ISM-NU/LMC-shells.git
 cd LMC-shells
-ln -s ../lmc-data data          # shared data folder ~/Projects/lmc-data, ignored by git
+ln -s ../lmc-data data          # shared data folder ~/Projects/LMC/lmc-data, ignored by git
 git submodule foreach --recursive 'ln -sfn "$toplevel/data" data'   # same data inside submodules
 python3 -m venv .venv && .venv/bin/pip install -r requirements.txt
 ```
