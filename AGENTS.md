@@ -10,7 +10,7 @@ first.
 ## Scope
 
 - Belongs here: DeMCELS data handling, rim tests, synthetic shells, figures and notes for the shell work.
-- Does not belong here: method code. VGT goes to ISM-NU/VGT-Denis, ROHSA to ISM-NU/ROHSA-LMC. Foreground and starlight comparison code goes to LMC-foreground. Cold-gas work goes to LMC-cold-gas.
+- Does not belong here: method code. VGT goes to ISM-NU/VGT.jl, ROHSA to ISM-NU/ROHSA-LMC. Foreground and starlight comparison code goes to LMC-foreground. Cold-gas work goes to LMC-cold-gas.
 - This repo imports `scripts/compare_vgt_polarization.py` from `deps/LMC-foreground`. Do not edit anything under `deps/`.
 
 ## Language

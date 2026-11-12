@@ -44,8 +44,8 @@ script describes. Do heavy steps on the cluster.
 ## Layout
 
 - `scripts/optical/` - DeMCELS tile fetch, mosaic and quick-look; `shell_rim_orientation.py` (rim tangency test against VGT and Planck); `synthetic_shell_vgt.py` (field-free synthetic shells).
-- `deps/VGT` - submodule, the VGT method (ISM-NU/VGT-Denis, branch `split/vgt-method`).
-- `deps/LMC-foreground` - submodule. Provides `scripts/compare_vgt_polarization.py` and the data inventory.
+- `deps/VGT` - submodule, the VGT method (ISM-NU/VGT.jl).
+- `deps/LMC-foreground` - submodule. Provides `scripts/compare_vgt_polarization.py` and the data inventory. ISM-NU/LMC-foreground is private for now (unpublished results), so outside readers can read these scripts but not run the rim test until it opens.
 
 ## Pinned method versions
 
@@ -55,7 +55,12 @@ script describes. Do heavy steps on the cluster.
 
 ## Related repos
 
-- [VGT-Denis](https://github.com/ISM-NU/VGT-Denis) - the VGT method.
+- [VGT.jl](https://github.com/ISM-NU/VGT.jl) - the VGT method.
 - [ROHSA-LMC](https://github.com/ISM-NU/ROHSA-LMC) - the ROHSA wrapper (method).
 - [LMC-foreground](https://github.com/ISM-NU/LMC-foreground) - foreground, Planck and starlight comparisons. Pinned here.
 - [LMC-cold-gas](https://github.com/ISM-NU/LMC-cold-gas) - ROHSA runs and cold H I work.
+
+## License
+
+MIT (`LICENSE`). DeMCELS images, Planck maps and VGT maps used here are not
+redistributed; the scripts download or read them from `data/`.
