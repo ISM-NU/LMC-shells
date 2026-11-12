@@ -1,4 +1,6 @@
 astropy
+healpy
 matplotlib
 numpy
-jupyter
+reproject
+scipy
