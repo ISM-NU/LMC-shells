@@ -136,12 +136,10 @@ PATCH_STEP, EMIT_SIGMA, EMIT_FRAC, BOOK_EXCL = 16, 5.0, 0.9, 1.5
 # true centre, so T at the exact synthetic centre is an upper bound for what the real-shell test can see. "offset" T =
 # mean of the T map (bilinear) over N_OFFSET centres drawn uniformly in that box; the same draws for every cube.
 OFFSET_RA_ARCMIN, OFFSET_DEC_ARCMIN, N_OFFSET = 2.7, 5.0, 200
-VGT_KEYS = dict(dn=20, ker=4, min_valid=100, fitter_mode="axial_vonmises", finalize_mask_mode="strict_nonpositive",
-                gradient_mode="central_checked", gradient_sample_mode="paired_finite",
-                histogram_edge_mode="modern_range", zero_stokes_policy="nan_before_smoothing",
+VGT_KEYS = dict(dn=20, ker=4, min_valid=100, fitter_mode="axial_vonmises",
+                gradient_mode="central_checked", zero_stokes_policy="nan_before_smoothing",
                 output_support_mode="smoothed_stokes_support", rbar2_weight=False, rbar2_gate=0.0)
-NOISE_KEYS = dict(noise=NOISE_K, noise_mode="scalar", noise_tile_size=128, noise_sigma_multiplier=1.0,
-                  noise_spatial_exponent=1.0, noise_channel_exponent=1.0)
+NOISE_KEYS = dict(noise=NOISE_K, noise_mode="scalar", noise_tile_size=128, noise_sigma_multiplier=1.0)
 
 
 def powerlaw_field(rng, n=NPIX, slope=-11.0 / 3.0):
