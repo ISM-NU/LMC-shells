@@ -10,17 +10,20 @@ Python only.
 
 ## Setup
 
-Usually this repository sits in the LMC workspace folder (`~/Projects/LMC`), whose `setup.sh` clones all related repositories next to each other and links the shared data; its AGENTS.md has the rules that span repositories.
+Group members usually work from the LMC workspace (the private ISM-NU/LMC-workspace repository), whose `setup.sh` clones the related repositories side by side and links the shared `lmc-data` folder.
+
+Outside the group, `deps/LMC-foreground` cannot be cloned yet (it is private until publication), so check out only the VGT submodule:
 
 ```bash
-git clone --recursive git@github.com:ISM-NU/LMC-shells.git
+git clone https://github.com/ISM-NU/LMC-shells.git
 cd LMC-shells
-ln -s ../lmc-data data          # shared data folder ~/Projects/LMC/lmc-data, ignored by git
+git submodule update --init deps/VGT   # group members: git submodule update --init --recursive
+ln -s ../lmc-data data          # shared data folder next to the repo, ignored by git
 git submodule foreach --recursive 'ln -sfn "$toplevel/data" data'   # same data inside submodules
 python3 -m venv .venv && .venv/bin/pip install -r requirements.txt
 ```
 
-Find the data in
+Group members find the data in
 `deps/LMC-foreground/docs/drive-index.md`.
 
 ## Run
@@ -49,7 +52,7 @@ script describes. Do heavy steps on the cluster.
 
 ## Pinned method versions
 
-- VGT: `deps/VGT`, branch `split/vgt-method`.
+- VGT: `deps/VGT`, tracking VGT.jl `main`.
 - LMC-foreground: `deps/LMC-foreground`.
 - Update with `git -C deps/<name> pull`, then commit the new pointer.
 
@@ -57,8 +60,8 @@ script describes. Do heavy steps on the cluster.
 
 - [VGT.jl](https://github.com/ISM-NU/VGT.jl) - the VGT method.
 - [ROHSA-LMC](https://github.com/ISM-NU/ROHSA-LMC) - the ROHSA wrapper (method).
-- [LMC-foreground](https://github.com/ISM-NU/LMC-foreground) - foreground, Planck and starlight comparisons. Pinned here.
-- [LMC-cold-gas](https://github.com/ISM-NU/LMC-cold-gas) - ROHSA runs and cold H I work.
+- LMC-foreground (private until publication) - foreground, Planck and starlight comparisons. Pinned here.
+- LMC-cold-gas (private until publication) - ROHSA runs and cold H I work.
 
 ## License
 
