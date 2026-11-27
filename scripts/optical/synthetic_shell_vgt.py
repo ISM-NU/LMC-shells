@@ -109,6 +109,8 @@ sys.path.insert(0, os.path.join(HERE, ".."))
 from shell_rim_orientation import nanbin, nansmooth, tangency_map, BIN, VGT_FWHM_ARCMIN, MIN_COVER  # noqa: E402
 
 REPO = os.path.abspath(os.path.join(HERE, "..", ".."))
+# The VGT.jl checkout next to this repo (override with VGT_REPO).
+VGT_REPO = os.path.abspath(os.environ.get("VGT_REPO") or os.path.join(REPO, "..", "VGT.jl"))
 DEFAULT_OUT = f"{REPO}/validation_output/synshell"
 
 NPIX = 600
@@ -383,17 +385,17 @@ def psi_path(out, name):
 
 
 def submit(out, bg, after=None):
-    """One deps/VGT/hpc/irgetas/vgt.slurm job per cube without a finished run (run_metadata.toml is written last)."""
+    """One VGT.jl hpc/irgetas/vgt.slurm job per cube without a finished run (run_metadata.toml is written last)."""
     ids = []
     for b, geom, c, s, hole in cube_list(bg):
         name = name_of(b, geom, c, s, hole)
         if os.path.exists(os.path.join(out, "vgt", name, "run_metadata.toml")):
             continue
         cmd = ["sbatch", "--parsable", "--job-name=vgt_synshell", "--cpus-per-task=8", "--mem=16G", "--time=01:00:00",
-               f"--export=ALL,VGT_REPO={os.path.join(REPO, 'deps', 'VGT')},VGT_CONFIG={os.path.join(out, 'configs', f'{name}.toml')}"]
+               f"--export=ALL,VGT_REPO={VGT_REPO},VGT_CONFIG={os.path.join(out, 'configs', f'{name}.toml')}"]
         if after:
             cmd.append(f"--dependency=afterok:{after}")
-        ids.append(subprocess.check_output(cmd + ["deps/VGT/hpc/irgetas/vgt.slurm"], cwd=REPO, text=True).strip().split(";")[0])
+        ids.append(subprocess.check_output(cmd + [os.path.join(VGT_REPO, "hpc", "irgetas", "vgt.slurm")], cwd=REPO, text=True).strip().split(";")[0])
         print(f"{name}: job {ids[-1]}", flush=True)
     print("VGT jobs:", ":".join(ids))
 

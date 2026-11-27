@@ -12,19 +12,18 @@ Python only.
 
 Group members usually work from the LMC workspace (the private ISM-NU/LMC-workspace repository), whose `setup.sh` clones the related repositories side by side and links the shared `lmc-data` folder.
 
-Outside the group, `deps/LMC-foreground` cannot be cloned yet (it is private until publication), so check out only the VGT submodule:
+The scripts use two repositories cloned next to this one: ISM-NU/VGT.jl at `../VGT.jl` and ISM-NU/LMC-foreground at `../LMC-foreground`. Outside the group, LMC-foreground cannot be cloned yet (it is private until publication), so clone only VGT.jl:
 
 ```bash
 git clone https://github.com/ISM-NU/LMC-shells.git
+git clone https://github.com/ISM-NU/VGT.jl.git
 cd LMC-shells
-git submodule update --init deps/VGT   # group members: git submodule update --init --recursive
 ln -s ../lmc-data data          # shared data folder next to the repo, ignored by git
-git submodule foreach --recursive 'ln -sfn "$toplevel/data" data'   # same data inside submodules
 python3 -m venv .venv && .venv/bin/pip install -r requirements.txt
 ```
 
 Group members find the data in
-`deps/LMC-foreground/docs/drive-index.md`.
+`../LMC-foreground/docs/drive-index.md`.
 
 ## Run
 
@@ -40,21 +39,18 @@ python3 scripts/optical/shell_rim_orientation.py --out DIR [--halpha demcels_ha_
 python3 scripts/optical/synthetic_shell_vgt.py {make|submit|score} --out DIR
 ```
 
-`synthetic_shell_vgt.py submit` submits one `deps/VGT/hpc/irgetas/vgt.slurm`
+`synthetic_shell_vgt.py submit` submits one `../VGT.jl/hpc/irgetas/vgt.slurm`
 job per synthetic cube on Irgetas. Run the `make` and `score` steps as the
 script describes. Do heavy steps on the cluster.
 
 ## Layout
 
 - `scripts/optical/` - DeMCELS tile fetch, mosaic and quick-look; `shell_rim_orientation.py` (rim tangency test against VGT and Planck); `synthetic_shell_vgt.py` (field-free synthetic shells).
-- `deps/VGT` - submodule, the VGT method (ISM-NU/VGT.jl).
-- `deps/LMC-foreground` - submodule. Provides `scripts/compare_vgt_polarization.py` and the data inventory. ISM-NU/LMC-foreground is private for now (unpublished results), so outside readers can read these scripts but not run the rim test until it opens.
 
-## Pinned method versions
+## Method versions
 
-- VGT: `deps/VGT`, tracking VGT.jl `main`.
-- LMC-foreground: `deps/LMC-foreground`.
-- Update with `git -C deps/<name> pull`, then commit the new pointer.
+- VGT comes from `../VGT.jl` (normally `main`), LMC-foreground from `../LMC-foreground`, which provides `scripts/compare_vgt_polarization.py` and the data inventory. ISM-NU/LMC-foreground is private for now (unpublished results), so outside readers can read these scripts but not run the rim test until it opens.
+- There is no pin: the scripts use whatever commit those checkouts are on. Record the VGT.jl commit with each result; versions used in a report are tagged in the method repos (`report-YYYY-MM-DD`).
 
 ## Related repos
 

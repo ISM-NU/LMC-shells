@@ -1,7 +1,0 @@
-[submodule "deps/VGT"]
-	path = deps/VGT
-	url = https://github.com/ISM-NU/VGT.jl.git
-	branch = main
-[submodule "deps/LMC-foreground"]
-	path = deps/LMC-foreground
-	url = git@github.com:ISM-NU/LMC-foreground.git
