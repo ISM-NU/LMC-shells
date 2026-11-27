@@ -11,7 +11,7 @@ first.
 
 - Belongs here: DeMCELS data handling, rim tests, synthetic shells, figures and notes for the shell work.
 - Does not belong here: method code. VGT goes to ISM-NU/VGT.jl, ROHSA to ISM-NU/ROHSA-LMC. Foreground and starlight comparison code goes to LMC-foreground. Cold-gas work goes to LMC-cold-gas.
-- This repo imports `scripts/compare_vgt_polarization.py` from `deps/LMC-foreground`. Do not edit anything under `deps/`.
+- This repo imports `scripts/compare_vgt_polarization.py` from the sibling checkout `../LMC-foreground`. VGT comes from `../VGT.jl`; change either in its own repo.
 
 ## Language
 
@@ -30,7 +30,7 @@ Use Julia where performance needs it. Simple scripts can be Python. This repo is
 ## Data and Slurm
 
 - Data live in `~/Projects/LMC/lmc-data`. `data` in the repo is a symlink made with `ln -s ../lmc-data data`. It is ignored by git. Never commit tiles, mosaics, cubes or run outputs.
-- Heavy computation (VGT on synthetic cubes) runs on Irgetas via Slurm, not on laptops. Use `deps/VGT/hpc/irgetas/vgt.slurm`.
+- Heavy computation (VGT on synthetic cubes) runs on Irgetas via Slurm, not on laptops. Use `../VGT.jl/hpc/irgetas/vgt.slurm`.
 - Generated products go to ignored directories (`data/...`, `validation_output/`).
 
 ## Docs
